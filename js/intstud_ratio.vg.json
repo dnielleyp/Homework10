@@ -1,0 +1,101 @@
+{
+    "$schema" : "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 600,
+    "height": 600,
+    "data" : {
+        "url": "data/int_student_ratio.csv"
+    },
+    "params": [
+        {
+        "name": "uni_select",
+        "bind": {
+            "input": "select",
+            "options":[
+                null,
+                "International",
+                "Local" 
+                
+            ],
+            "labels": [
+                "Show All",
+                "International",
+                "Local"
+            ],
+            "name": "University Selection"
+        }
+        }
+    ],
+    "transform": [
+        {
+            "filter":"uni_select == null || datum.Student == uni_select"}],
+    "layer": [
+        {
+        "mark": "bar",
+        "encoding": {
+            "x": {
+                "field": "University",
+                "type": "nominal"
+            },
+        
+            "y": {
+                "field": "Quantity",
+                "title": "Number of Students",
+                "type": "quantitative",
+                "scale": {"domain": [0,65000]}
+            },
+            "color": {
+                "field": "Student",
+                "type": "nominal",
+                "scale": {
+                    "domain": ["International","Local"],
+                    "range": ["#FE828C","#D3D3D3"]
+                },
+                "title": "Student Type"
+            },
+            "tooltip": [
+                {"field": "Quantity", "type": "quantitative", "title": "Number of students",
+                "format": ","}],
+                
+            "order": {"field": "Student"}
+        }
+    
+    },
+    {
+        "mark": {"type": "circle", "opacity": 0.7, "size": 20},
+        "encoding": {
+            "x": {"datum": "Monash University"},
+            "y": {"datum": 22140}
+        }
+    },
+    {
+        "transform": [
+            {
+                "calculate": "'The university with the highest percentage of international students is; ' +  'Monash University'",
+                "as": "text_annotation_r"
+            },
+            {
+                "calculate": "split(datum.text_annotation_r, ';')",
+                "as": "text_annotation"
+            }
+        ],
+        "mark": {
+            "type": "text",
+            "align": "left",
+            "fontStyle": "italic",
+            "baseline": "middle",
+            "dx": 10,
+            "dy": 8,
+            "fontWeight": 100,
+            "fontSize": 12
+        },
+        "encoding": {
+            "text": {"field": "text_annotation"},
+            "x": {"datum": "Monash University"},
+            "y": {"datum": 22140}}
+    }
+
+
+
+]
+    
+}
