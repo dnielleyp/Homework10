@@ -1,0 +1,22 @@
+h1 {
+    font-size: 20px;
+    text-align: left;
+    
+    
+}
+
+.pure-g{
+    width : 100%;
+    align-items: center ;
+}
+
+#choropleth_map_crimerate{
+    width: 90%;
+    height: 100%;
+}
+
+html, body{
+    background-color: rgb(255, 253, 236);
+}
+
+
